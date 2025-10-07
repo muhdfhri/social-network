@@ -1,7 +1,7 @@
 {{-- The whole world belongs to you. --}}
 <div class="flex flex-col items-center">
     <div class="w-3/4 max-w-md bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800 p-6 mt-2">
-        <h2 class="mb-2 text-center text-2xl font-bold text-gray-700 dark:text-gray-200">Create Your Own Channel</h2>
+        <h2 class="mb-2 text-center text-2xl font-bold text-gray-700 dark:text-gray-200">Buat Saluran Anda</h2>
         <form class="flex flex-col" method="post" action="{{ route('create-channel') }}" enctype="multipart/form-data">
             @csrf
             <div class="flex items-center justify-between w-full mb-4 gap-6">

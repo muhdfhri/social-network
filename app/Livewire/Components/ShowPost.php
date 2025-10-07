@@ -90,6 +90,48 @@ class ShowPost extends Component
         session()->flash('success', 'Post deleted successfully');
         return redirect()->route('profile.show', Auth::user()->username);
     }
+    
+    public function deleteComment($commentId)
+    {
+        $comment = Comment::with('post')->findOrFail($commentId);
+        
+        // Check if the authenticated user is the owner of the comment, the post owner, or an admin
+        if (auth()->id() !== $comment->user_id && 
+            auth()->id() !== $comment->post->user_id && 
+            auth()->user()->role !== 'admin') {
+            session()->flash('error', 'Anda tidak memiliki izin untuk menghapus komentar ini');
+            return redirect()->back();
+        }
+        
+        DB::beginTransaction();
+        try {
+            // Decrement the comment count on the post
+            $post = $comment->post;
+            $post->decrement('comments');
+            
+            // Delete the comment
+            $comment->delete();
+            
+            DB::commit();
+            session()->flash('success', 'Komentar berhasil dihapus');
+            
+            // Return JSON response for AJAX requests
+            if (request()->wantsJson()) {
+                return response()->json(['success' => true, 'message' => 'Komentar berhasil dihapus']);
+            }
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error deleting comment: ' . $e->getMessage());
+            session()->flash('error', 'Terjadi kesalahan saat menghapus komentar');
+            
+            if (request()->wantsJson()) {
+                return response()->json(['success' => false, 'message' => 'Terjadi kesalahan saat menghapus komentar'], 500);
+            }
+        }
+        
+        return redirect()->back();
+    }
 
     public function deleteAndBan($post_id)
     {

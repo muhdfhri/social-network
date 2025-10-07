@@ -71,6 +71,7 @@ Route::middleware(['auth', 'verified', 'VerifiedUser'])->group(function () {
     Route::get('/post/{post:id}/like', [Home::class, 'like'])->name('post.like');
     Route::get('/post/{post:id}/dislike', [Home::class, 'dislike'])->name('post.dislike');
     Route::post('/post/{post:id}/comment', [ShowPost::class, 'saveComment'])->name('post.comment');
+    Route::delete('/comment/{comment}', [ShowPost::class, 'deleteComment'])->name('comment.delete');
     Route::get('/post/{post:uuid}/delete', [ShowPost::class, 'deletePost'])->name('post.delete');
 
     // edit post
