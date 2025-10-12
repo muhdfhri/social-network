@@ -21,8 +21,27 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                // If user is already authenticated, redirect to home
+                if ($request->is('login') || $request->is('register')) {
+                    return redirect()->route('home');
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
+        }
+
+        // For guests trying to access auth pages, allow the request
+        if ($request->is('login') || $request->is('register')) {
+            return $next($request);
+        }
+
+        // For all other guest requests, show the landing page
+        if (!Auth::check() && $request->path() === '/') {
+            return $next($request);
+        }
+
+        // If not authenticated and not on the landing page, redirect to landing
+        if (!Auth::check() && $request->path() !== '/') {
+            return redirect('/');
         }
 
         return $next($request);

@@ -43,6 +43,18 @@ use App\Http\Controllers\Vendor\Chatify\MessagesController;
 |
 */
 
+// Public Routes - Landing Page
+Route::get('/', [\App\Http\Controllers\LandingPageController::class, 'index'])->name('landing');
+
+// Authentication Routes
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
+    Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
+});
+
+// Authenticated Routes
 Route::middleware(['auth', 'verified', 'VerifiedUser'])->group(function () {
     Route::get('/home', Home::class)->name('home');
     Route::get('/admin', Admin::class)->name('admin');
@@ -166,9 +178,5 @@ Route::middleware('auth')->group(function () {
 Route::get('/terms-and-conditions', function () {
     return view('terms-and-conditions');
 })->name('terms-and-conditions');
-
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('check.username');
 
 require __DIR__ . '/auth.php';
