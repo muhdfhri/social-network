@@ -45,8 +45,8 @@ class ProfileEdit extends Component
     {
         $partner = ($request->relationship == 'single') ? null : $request->partner;
 
-        // Validasi password jika diisi
-        if (!empty($request->current_password) || !empty($request->new_password) || !empty($request->new_password_confirmation)) {
+        // Validasi password hanya jika new_password diisi
+        if (!empty($request->new_password)) {
             $request->validate([
                 'current_password' => ['required', 'current_password'],
                 'new_password' => ['required', 'string', 'min:8', 'confirmed'],
