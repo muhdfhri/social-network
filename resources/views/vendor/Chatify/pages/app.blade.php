@@ -7,7 +7,7 @@
         {{-- Header and search bar --}}
         <div class="m-header ">
             <nav class="flex items-center justify-between mb-4">
-                <a href="/" class="flex items-center gap-6">
+                <a href="{{ route('home') }}" class="flex items-center gap-6">
                     <i class="fa-brands fa-rocketchat"></i>
                     <span>{{ config('chatify.name') }}</span>
                 </a>
