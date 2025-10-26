@@ -153,7 +153,7 @@
                                 <div class="flex items-start space-x-3">
                                     <img src="{{ asset('images/profiles/' . $comment->user->profile) }}" 
                                          alt="Avatar"
-                                         class="w-10 h-10 rounded-full flex-shrink-0 mt-1">
+                                         class="w-8 h-8 rounded-full flex-shrink-0 mt-0.5 object-cover">
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center space-x-2">
                                             <a href="{{ route('profile.show', $comment->user->username) }}" 
