@@ -60,8 +60,9 @@
                         <div
                             class="w-full flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
                             <a href="{{ url($notification->url) }}" class="flex items-center w-2/3">
-                                <img src="{{ 'images/profiles/' . $notificationFrom->profile }}" alt="Avatar"
-                                    class="w-12 h-12 rounded-full mr-4">
+                                <img src="{{ $notificationFrom->profile_photo_url }}" 
+                                     alt="{{ $notificationFrom->first_name }} {{ $notificationFrom->last_name }}"
+                                     class="w-12 h-12 rounded-full object-cover mr-4">
                                 <p class="text-sm text-black dark:text-white">
                                     <span
                                         class="text-lg font-bold text-black dark:text-white">{{ $notification->type }}</span>
@@ -95,8 +96,9 @@
                         <a class="w-1/2 mx-auto flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
                             href="{{ url($notification->url) }}">
                             <div class="flex items-center">
-                                <img src="{{ 'images/profiles/' . $notificationFrom->profile }}" alt="Avatar"
-                                    class="w-12 h-12 rounded-full mr-4">
+                                <img src="{{ $notificationFrom->profile_photo_url }}" 
+                                     alt="{{ $notificationFrom->first_name }} {{ $notificationFrom->last_name }}"
+                                     class="w-12 h-12 rounded-full object-cover mr-4">
                                 <p class="text-sm text-black dark:text-white">
                                     <span
                                         class="text-lg font-bold text-black dark:text-white">{{ $notification->type }}</span>

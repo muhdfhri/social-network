@@ -49,8 +49,9 @@
         <div class="mt-4 flex justify-between text-gray-700 dark:text-gray-100">
             <div class="flex">
                 <div>
-                    <img src="{{ asset('images/profiles/' . $user->profile) }}" alt="Avatar"
-                        class="w-12 h-12 rounded-full mr-4">
+                    <img src="{{ $user->profile_photo_url }}" 
+                         alt="{{ $user->first_name }} {{ $user->last_name }}"
+                         class="w-12 h-12 rounded-full object-cover mr-4">
                 </div>
                 <div>
                     <span class="text-sm font-bold">By <a
@@ -125,8 +126,9 @@
 
                             <div class="flex flex-row">
                                 <div>
-                                    <img src="{{ asset('images/profiles/' . $comment->user->profile) }}" alt="Avatar"
-                                        class="w-12 h-12 rounded-full mr-4">
+                                    <img src="{{ $comment->user->profile_photo_url }}" 
+                                         alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}"
+                                         class="w-12 h-12 rounded-full object-cover mr-4">
                                 </div>
                                 <div class="min-w-lg">
                                     <span class="text-sm font-bold">By <a

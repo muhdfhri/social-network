@@ -30,36 +30,57 @@
         class=" hidden absolute z-10 center-absolute w-1/4 bg-red-100 border-t-8 border-red-600 rounded-b-lg px-4 py-4 flex-col justify-around shadow-md dark:bg-white text-gray-700 dark:text-gray-700">
         <div class="flex flex-col justify-center items-center">
             <img src="{{ asset('images/website/trash_bin.gif') }}" alt="" width="100px">
-            <h2 class="text-lg font-bold mt-2 text-center">Are you sure to delete <span id="modal-title"></span> ?</h2>
+            <h2 class="text-lg font-bold mt-2 text-center">Apakah anda yakin ingin menghapus <span id="modal-title"></span> ?</h2>
             <div class="flex justify-between gap-6 mt-2">
                 <a href="{{ route('post.delete', $uuid, 'delete') }}"
                     class="bg-red-600 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button">
-                    Delete
+                    Hapus
                 </a>
                 <button
                     class="bg-gray-600 active:bg-gray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button" onclick="closeModal()">
-                    Cancle
+                    Batal
                 </button>
             </div>
         </div>
     </div>
 
     <div class="w-3/4 max-w-md bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800 p-6 mt-2 mb-2">
-        <div style="background-image: url({{ asset('images/thumbnails/' . $post->thumbnail) }}); background-size: cover; background-position: center; background-repeat: no-repeat;"
-            class="min-h-xs flex items-center justify-center rounded-lg">
-            <div class="glass-morphic min-w-xl text-center">
-                <h1 class="text-3xl font-bold text-white">{{ $post->title }}
+       <div class="mb-8">
+        <!-- Gambar thumbnail -->
+        <div class="w-full rounded-xl overflow-hidden mb-2">
+            <img src="{{ asset('images/thumbnails/' . $post->thumbnail) }}" 
+                alt="{{ $post->title }}"
+                class="w-full h-auto object-contain">
+        </div>
+        
+        <!-- Title dan metadata -->
+        <div>
+            <!-- Label "Judul Postingan" -->
+            <div class="flex items-center mb-1">
+                <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
+                    Judul Postingan
+                </span>
+            </div>
+            
+            <div class="flex items-start">
+                <div class="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg mr-4 flex-shrink-0">
+                    <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight">
+                    {{ $post->title }}
                 </h1>
             </div>
         </div>
+    </div>
         <div class="mt-4 flex justify-between items-start text-gray-700 dark:text-gray-100">
             <div class="flex">
-                <div>
-                    <img src="{{ asset('images/profiles/' . $post->user->profile) }}" alt="Avatar"
-                        class="w-12 h-12 rounded-full mr-4">
-                </div>
+                <img src="{{ $post->user->profile_photo_url }}" 
+                     alt="{{ $post->user->name }}"
+                     class="w-12 h-12 rounded-full object-cover mr-4">
                 <div>
                     <span class="text-sm font-bold">By <a
                             href="{{ route('profile.show', $post->user->username) }}">{{ $post->user->username }}</a></span><br>
@@ -151,8 +172,8 @@
 
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex items-start space-x-3">
-                                    <img src="{{ asset('images/profiles/' . $comment->user->profile) }}" 
-                                         alt="Avatar"
+                                    <img src="{{ $comment->user->profile_photo_url }}" 
+                                         alt="{{ $comment->user->name }}" 
                                          class="w-8 h-8 rounded-full flex-shrink-0 mt-0.5 object-cover">
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center space-x-2">

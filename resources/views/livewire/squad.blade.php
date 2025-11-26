@@ -120,8 +120,9 @@
                     <div class="flex flex-col p-4 bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800">
                         <div class="flex items-center justify-between">
                             <div class="flex">
-                                <img src="{{ asset('images/profiles/' . $user->profile) }}" alt="Avatar"
-                                    class="w-12 h-12 rounded-full mr-4">
+                                <img src="{{ $user->profile_photo_url }}" 
+                                     alt="{{ $user->first_name }} {{ $user->last_name }}"
+                                     class="w-12 h-12 rounded-full object-cover mr-4">
                                 <div>
                                     <a href="{{ route('profile.show', $user->username) }}">
                                         <h2 class="text-sm font-medium text-gray-700 dark:text-gray-200">

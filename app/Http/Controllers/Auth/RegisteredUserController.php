@@ -34,11 +34,16 @@ class RegisteredUserController extends Controller
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'nim' => ['required', 'string', 'size:9', 'regex:/^1211050\d{2}$/', 'unique:' . User::class],
             'username' => ['required', 'string', 'max:255', 'unique:' . User::class],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'profile' => ['required', 'image', 'mimes:png,jpeg,jpg,gif', 'max:2048'],
             'gender' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'nim.regex' => 'Format NIM tidak valid. Pastikan Anda merupakan mahasiswa fakultas ilmu komputer UNUSU agar valid dan bisa mendaftar',
+            'nim.size' => 'NIM harus terdiri dari 9 digit',
+            'nim.unique' => 'NIM sudah terdaftar',
         ]);
 
         $profile = time() . '.' . $request->profile->extension();
@@ -49,6 +54,7 @@ class RegisteredUserController extends Controller
             'uuid' => Str::uuid(),
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'nim' => $request->nim,
             'username' => $request->username,
             'email' => $request->email,
             'profile' => $profile,

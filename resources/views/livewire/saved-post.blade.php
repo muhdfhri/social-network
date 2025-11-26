@@ -50,8 +50,9 @@
                                         </p>
                                     </div>
                                 @else
-                                    <img src="{{ 'images/profiles/' . $post->user->profile }}" alt="Avatar"
-                                        class="w-12 h-12 rounded-full mr-4">
+                                    <img src="{{ $post->user->profile_photo_url }}" 
+                                         alt="{{ $post->user->first_name }} {{ $post->user->last_name }}"
+                                         class="w-12 h-12 rounded-full object-cover mr-4">
                                     <div>
                                         <a href="{{ route('profile.show', $post->user->username) }}"
                                             class="text-sm font-bold text-gray-700 dark:text-gray-200">
